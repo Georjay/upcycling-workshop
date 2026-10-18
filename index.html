@@ -53,6 +53,16 @@ li.brk .ti{color:#7b7486;font-weight:500}
 footer{background:var(--gold2);color:var(--v3);padding:18px 20px 22px;font-size:13px}
 footer b{display:block;font-size:11px;letter-spacing:.26em;margin-bottom:4px}
 footer .upd{margin-top:10px;font-size:11.5px;opacity:.8}
+footer .soc{margin-top:0;display:flex;align-items:center;gap:10px}
+footer .soc a{width:38px;height:38px;border-radius:50%;background:var(--v3);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none}
+footer .soc a svg{width:19px;height:19px}
+footer .soc .handle{font-weight:700;font-size:14px;letter-spacing:.04em;margin-left:4px}
+.credit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;padding:14px 20px 18px;background:var(--v3);color:#d9c9ec;text-decoration:none;font-size:12.5px;text-align:center}
+.credit svg{width:18px;height:18px;color:#25D366;flex:none}
+.credit b{color:#fff}
+.credit em{font-style:normal;color:var(--gold);font-size:11.5px;letter-spacing:.04em}
+.credit:not([href]) em{display:none}
+.credit:not([href]) svg{display:none}
 </style>
 </head>
 <body>
@@ -86,12 +96,30 @@ footer .upd{margin-top:10px;font-size:11.5px;opacity:.8}
   </main>
 
   <footer>
-    <b>VENUE</b>NYU Accra Academic Center
+    <div class="soc">
+      <a id="ig" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+      <a id="fb" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg></a>
+      <a id="yt" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.6 2.6 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+      <span class="handle">@nyu_accra</span>
+    </div>
     <div class="upd" id="upd"></div>
   </footer>
+  <a class="credit" id="credit" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1 0-.3-.1-.5-.2z"/></svg><span>Designed by <b>George</b></span><em>Need a design? Chat on WhatsApp</em></a>
 </div>
 
 <script>
+/* ============================================================
+   LINKS: edit if any handle differs
+   WHATSAPP: country code + number, digits only, e.g. "233241234567"
+   ============================================================ */
+const LINKS = {
+  instagram: "https://www.instagram.com/nyu_accra/",
+  facebook:  "https://www.facebook.com/nyu_accra",
+  youtube:   "https://www.youtube.com/@nyu_accra",
+  whatsapp:  "233547337900",
+};
+const WA_MESSAGE = "Hi George, I saw your design for the NYU Accra Upcycling Workshop and I'd like to talk about a project.";
+
 /* ============================================================
    EDIT THE PROGRAMME HERE
    - time:  as it should appear, e.g. "11:15 AM"
@@ -120,6 +148,10 @@ const PROGRAMME = [
 ];
 /* ============================================================ */
 
+document.getElementById('ig').href = LINKS.instagram;
+document.getElementById('fb').href = LINKS.facebook;
+document.getElementById('yt').href = LINKS.youtube;
+if (LINKS.whatsapp) document.getElementById('credit').href = 'https://wa.me/' + LINKS.whatsapp.replace(/\D/g,'') + '?text=' + encodeURIComponent(WA_MESSAGE);
 document.getElementById('note').textContent = NOTE;
 document.getElementById('upd').textContent = UPDATED;
 const ol = document.getElementById('prog');
