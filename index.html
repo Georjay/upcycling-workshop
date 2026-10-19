@@ -63,6 +63,13 @@ footer .soc .handle{font-weight:700;font-size:14px;letter-spacing:.04em;margin-l
 .credit em{font-style:normal;color:var(--gold);font-size:11.5px;letter-spacing:.04em}
 .credit:not([href]) em{display:none}
 .credit:not([href]) svg{display:none}
+li.sess{display:block;padding:26px 0 8px;background:#fff;z-index:1}
+li.sess:first-child{padding-top:6px}
+li.sess::before{display:none}
+li.sess .sh{display:flex;align-items:center;justify-content:space-between;gap:10px}
+li.sess .sn{background:var(--v);color:#fff;font-size:11px;font-weight:700;letter-spacing:.26em;padding:6px 10px 5px}
+li.sess .sp{font-size:12.5px;font-weight:700;color:var(--v);letter-spacing:.02em}
+li.sess .st{margin-top:8px;font-family:'Bodoni Moda',serif;font-weight:800;font-size:26px;line-height:1.1;color:var(--ink);padding-bottom:10px;border-bottom:1px solid rgba(87,6,140,.15)}
 </style>
 </head>
 <body>
@@ -85,7 +92,7 @@ footer .soc .handle{font-weight:700;font-size:14px;letter-spacing:.04em;margin-l
   </section>
   <div class="feat">
     <div><div class="k">KEYNOTE &amp; SPECIAL GUEST</div><div class="n">Sister <i>Deborah</i></div></div>
-    <div><div class="k">LIVE PERFORMANCE</div><div class="n">Legon <i>Palmwine Band</i></div></div>
+    <div><div class="k">LIVE PERFORMANCE</div><div class="n">Legon Palm <i>Wine Band</i></div></div>
   </div>
   <div class="kente"></div>
 
@@ -127,10 +134,12 @@ const WA_MESSAGE = "Hi George, I saw your design for the NYU Accra Upcycling Wor
    - desc:  optional short description ("" for none)
    - type:  "" normal | "hl" highlight (gold-filled dot) | "brk" break
    - tag:   optional small label, e.g. "KEYNOTE" ("" for none)
+   - session heading rows: {session:"SESSION 1", name:"...", span:"start – end"}
    ============================================================ */
 const NOTE = "Programme subject to change.";
-const UPDATED = "Last updated: 18 October 2026";
+const UPDATED = "Last updated: 19 October 2026";
 const PROGRAMME = [
+  {session:"SESSION 1", name:"Ideas & Materials", span:"10:30 AM – 1:00 PM"},
   {time:"10:30 AM", title:"Arrival, registration & viewing of materials", desc:"", type:"brk", tag:""},
   {time:"11:00 AM", title:"Welcome & workshop orientation", desc:"", type:"", tag:""},
   {time:"11:15 AM", title:"From global clothing circulation to Kantamanto", desc:"A short presentation on second-hand clothing circulation and its environmental issues, and Kantamanto as a site for sorting, repair, reuse, adaptation and recirculation.", type:"hl", tag:""},
@@ -139,10 +148,12 @@ const PROGRAMME = [
   {time:"12:20 PM", title:"Reading the palm wine ensemble", desc:"The Legon Palm Wine Band demonstrates performance conventions.", type:"hl", tag:"LIVE PERFORMANCE"},
   {time:"12:40 PM", title:"Costume design challenge", desc:"", type:"", tag:""},
   {time:"1:00 PM",  title:"Lunch break", desc:"", type:"brk", tag:""},
+  {session:"SESSION 2", name:"Making & Showcase", span:"1:45 – 4:30 PM"},
   {time:"1:45 PM",  title:"Practical session I: Garment transformation", desc:"", type:"hl", tag:"HANDS-ON"},
   {time:"3:45 PM",  title:"Refreshment break", desc:"", type:"brk", tag:""},
   {time:"4:00 PM",  title:"Practical session II: Fitting & finishing", desc:"", type:"", tag:"HANDS-ON"},
   {time:"4:00 PM",  title:"Costume presentation, catwalk & performance", desc:"", type:"hl", tag:""},
+  {session:"SESSION 3", name:"Keynote Conversation", span:"4:30 – 5:50 PM"},
   {time:"4:30 PM",  title:"Reflective conversation", desc:"With our Keynote & Special Guest, Sister Deborah.", type:"hl", tag:"KEYNOTE"},
   {time:"5:50 PM",  title:"Closing reflection", desc:"", type:"", tag:""},
 ];
@@ -157,6 +168,14 @@ document.getElementById('upd').textContent = UPDATED;
 const ol = document.getElementById('prog');
 for (const s of PROGRAMME) {
   const li = document.createElement('li');
+  if (s.session) {
+    li.className = 'sess';
+    li.innerHTML = '<div class="sh"><span class="sn"></span><span class="sp"></span></div><div class="st"></div>';
+    li.querySelector('.sn').textContent = s.session;
+    li.querySelector('.sp').textContent = s.span;
+    li.querySelector('.st').textContent = s.name;
+    ol.appendChild(li); continue;
+  }
   if (s.type) li.className = s.type;
   const t = document.createElement('div'); t.className = 't'; t.textContent = s.time;
   const b = document.createElement('div');
